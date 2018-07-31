@@ -1,4 +1,4 @@
-package com.idcg.smart.apputil;
+package com.idcg.smart;
 
 import android.content.Context;
 import android.net.ConnectivityManager;
