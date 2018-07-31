@@ -110,6 +110,7 @@ bintray {
     user = properties.getProperty("zippsun.user")    //读取 local.properties 文件里面的 bintray.user
     key = properties.getProperty("zippsun.apikey")   //读取 local.properties 文件里面的 bintray.apikey
     configurations = ['archives']
+    override = true
     pkg {
         //注意：这里的repo值必须要和你创建Maven仓库的时候的名字一样
         repo = "SmartUtil"
