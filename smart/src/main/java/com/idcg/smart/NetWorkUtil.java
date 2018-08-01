@@ -15,7 +15,6 @@ import android.telephony.TelephonyManager;
  */
 public class NetWorkUtil {
 
-
     public static final int CHINA_MOBILE = 1; // 中国移动
     public static final int CHINA_UNICOM = 2; // 中国联通
     public static final int CHINA_TELECOM = 3; // 中国电信
@@ -56,6 +55,7 @@ public class NetWorkUtil {
      * @return boolean 是否是wifi网络
      */
     public static boolean isWifi(Context context) {
+
         ConnectivityManager connectivityManager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo activeNetInfo = connectivityManager.getActiveNetworkInfo();
         if (activeNetInfo != null && activeNetInfo.getType() == ConnectivityManager.TYPE_WIFI) {
