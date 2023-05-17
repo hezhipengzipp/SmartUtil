@@ -3,7 +3,6 @@ plugins {
     id 'org.jetbrains.kotlin.android'
     id 'org.jetbrains.dokka'
 }
-apply from: "../publish.gradle"
 android {
     namespace 'com.clife.utils'
     compileSdk 32
@@ -30,9 +29,12 @@ android {
         jvmTarget = '1.8'
     }
 }
-
+ext {
+    PUBLISH_ARTIFACT_ID = 'utils'
+    PUBLISH_VERSION = '1.0.1-SNAPSHOT'
+}
+apply from: "../publish.gradle"
 dependencies {
-
     implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
