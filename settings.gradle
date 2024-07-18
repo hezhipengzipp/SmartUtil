@@ -15,3 +15,4 @@ dependencyResolutionManagement {
 rootProject.name = "SmartUtil"
 include ':app'
 include ':utils'
+include ':hotfix'
