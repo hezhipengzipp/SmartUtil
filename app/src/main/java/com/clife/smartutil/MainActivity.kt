@@ -2,9 +2,11 @@ package com.clife.smartutil
 
 import android.content.pm.PackageManager
 import android.os.Bundle
-import android.os.Environment
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
@@ -16,11 +18,33 @@ import java.io.File
 class MainActivity : AppCompatActivity() {
     private final val TAG = MainActivity::class.java.simpleName
     val PERMISSION_REQUEST_CODE: Int = 1
+
+    private val handler = Handler(Looper.getMainLooper()) { msg ->
+        when (msg.what) {
+            100 -> {
+                Log.i("fish", "handler")
+            }
+        }
+        Log.d("fish", "hello world")
+        true // 返回 true 表示消息已处理
+    }
+
+    companion object {
+        val list = mutableListOf<ImageView>()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         var sayException: SayException? = null
         setContentView(R.layout.main_activity)
         val button: Button = findViewById(R.id.bt_say)
+        val btAddIv: Button = findViewById(R.id.bt_add_iv)
+        btAddIv.setOnClickListener {
+            handler.sendEmptyMessageDelayed(100, 30_000)
+            for (i in 0..100) {
+                list.add(ImageView(this))
+            }
+        }
         button.setOnClickListener {
             val file =
                 File(externalCacheDir!!.path + File.separator + "say_something_hotfix.jar")
@@ -54,6 +78,8 @@ class MainActivity : AppCompatActivity() {
 
             }
         }
+
+
     }
 
     private fun processHotfix() {
@@ -91,5 +117,11 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this, "Permissions denied", Toast.LENGTH_SHORT).show()
             }
         }
+    }
+}
+
+class MemoryLeak {
+    fun doSomething() {
+        Log.i("MemoryLeak", "doSomething")
     }
 }
