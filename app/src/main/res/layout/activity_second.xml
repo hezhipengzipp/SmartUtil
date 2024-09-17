@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/bt_observe_memory"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:text="观察内存泄露"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/bt_open_fps"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:text="打开fps"
+        app:layout_constraintTop_toBottomOf="@+id/bt_observe_memory" />
+
+    <Button
+        android:id="@+id/bt_close_fps"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:text="关闭fps"
+        app:layout_constraintTop_toBottomOf="@+id/bt_open_fps" />
+
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragment_container"
+        android:name="com.clife.smartutil.fragment.MainFragment"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        app:layout_constraintTop_toBottomOf="@+id/bt_close_fps" />
+
+    <ImageView
+        android:id="@+id/iv_myhead"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/fragment_container" />
+</androidx.constraintlayout.widget.ConstraintLayout>

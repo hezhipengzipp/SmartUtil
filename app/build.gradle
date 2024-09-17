@@ -24,12 +24,20 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = '11'
     }
+    sourceSets {
+        main {
+            aidl {
+                srcDirs 'src/main/aidl'
+            }
+        }
+    }
+
 }
 
 dependencies {
@@ -41,4 +49,14 @@ dependencies {
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.14'
+    implementation "androidx.asynclayoutinflater:asynclayoutinflater:1.0.0"
+    implementation 'com.github.anrwatchdog:anrwatchdog:1.4.0'
+    implementation 'com.google.code.gson:gson:2.11.0'
+    implementation 'pub.devrel:easypermissions:3.0.0'
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+    implementation("org.greenrobot:eventbus:3.3.1")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.5")
+    implementation("androidx.fragment:fragment-ktx:1.8.3")
+    implementation("androidx.activity:activity-ktx:1.9.2")
 }
