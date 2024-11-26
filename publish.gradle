@@ -12,8 +12,6 @@ task androidSourcesJar(type: Jar) {
 //--- 修改配置一 ---
 ext {
     PUBLISH_GROUP_ID = 'io.github.hezhipengzipp'
-    PUBLISH_ARTIFACT_ID = 'utils'
-    PUBLISH_VERSION = '1.0.0-SNAPSHOT'
 }
 
 //--- 修改配置二 ---
@@ -36,13 +34,13 @@ if (secretPropsFile.exists()) {
 publishing {
     publications {
         release(MavenPublication) {
-            println("publish-maven Log-------> PUBLISH_GROUP_ID: $PUBLISH_GROUP_ID; PUBLISH_ARTIFACT_ID: $PUBLISH_ARTIFACT_ID; PUBLISH_VERSION: $PUBLISH_VERSION")
+            println("publish-maven Log-------> PUBLISH_GROUP_ID: $PUBLISH_GROUP_ID; PUBLISH_ARTIFACT_ID: $project.PUBLISH_ARTIFACT_ID; PUBLISH_VERSION: $PUBLISH_VERSION")
             // The coordinates of the library, being set from variables that
             // we'll set up in a moment
 
             //配置一传入的参数
             groupId PUBLISH_GROUP_ID
-            artifactId PUBLISH_ARTIFACT_ID
+            artifactId project.PUBLISH_ARTIFACT_ID
             version PUBLISH_VERSION
 
             // Two artifacts, the `aar` and the sources
@@ -52,10 +50,10 @@ publishing {
             // Self-explanatory metadata for the most part
             pom {
                 //--- 修改配置三 ---
-                name = PUBLISH_ARTIFACT_ID
+                name = project.PUBLISH_ARTIFACT_ID
                 description = 'Android工具类' //添加文件描述
                 // If your project has a dedicated site, use its URL here
-                url = 'https://github.com/xxx/xxxx' //项目github链接
+                url = 'https://github.com/hezhipengzipp/SmartUtil' //项目github链接
                 licenses {
                     license {
                         //协议类型，一般默认Apache License2.0的话不用改：
@@ -75,10 +73,10 @@ publishing {
                 scm {
                     //--- 修改配置五 ---
                     //修改成你的Git地址：
-                    connection = 'scm:git:github.com/xxx/xxxx.git'
-                    developerConnection = 'scm:git:ssh://github.com/xxx/xxxx.git'
+                    connection = 'scm:git:github.com/hezhipengzipp/SmartUtil.git'
+                    developerConnection = 'scm:git:ssh://github.com/hezhipengzipp/SmartUtil.git'
                     //分支地址：
-                    url = 'https://github.com/xxx/xxxx/tree/master'
+                    url = 'https://github.com/hezhipengzipp/SmartUtil/tree/master'
                 }
                 // A slightly hacky fix so that your POM will include any transitive dependencies
                 // that your library builds upon
@@ -96,20 +94,12 @@ publishing {
         }
     }
     repositories {
-        // The repository to publish to, Sonatype/MavenCentral
         maven {
-            // This is an arbitrary name, you may also use "mavencentral" or
-            // any other name that's descriptive for you
-
-            //--- 修改配置六 ---
             name = "mavencentral"
-            def releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+//            def releasesRepoUrl = "https://s01.oss.sonatype.org/service/local/staging/deploy/maven2/"
+            def releasesRepoUrl = "https://s01.oss.sonatype.org/content/repositories/releases/"
             def snapshotsRepoUrl = "https://s01.oss.sonatype.org/content/repositories/snapshots/"
-            // You only need this if you want to publish snapshots, otherwise just set the URL
-            // to the release repo directly
-            url = version.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
-
-            // The username and password we've fetched earlier
+            url = PUBLISH_VERSION.endsWith('SNAPSHOT') ? snapshotsRepoUrl : releasesRepoUrl
             credentials {
                 username ossrhUsername
                 password ossrhPassword
